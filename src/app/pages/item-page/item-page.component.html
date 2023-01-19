@@ -1,0 +1,30 @@
+<p *ngIf="loading">Loading...</p>
+
+<div *ngIf="!loading" class="ml-1flex flex-col">
+
+  <div class="text-base mt-2 pb-4 border-b-2 border-gray-300"><a
+    href="{{itemService.itemData.url}}">{{itemService.itemData.title}}
+    <div *ngIf="itemService.itemData.text" class="text-sm ml-3 mb-2"
+         [innerHTML]="itemService.itemData.text | sanitizeHtml"></div>
+    <span *ngIf="itemService.itemData.url" class="text-xs">({{sliceURL(itemService.itemData.url)}})</span>
+  </a>
+    <div>
+      <div class="flex text-xs">
+        {{itemService.itemData.points}} {{itemService.itemData.points === 1 ? 'point' : 'points'}}
+        by {{itemService.itemData.author}} {{substractDates(itemService.itemData.created_at)}}
+        <div class="ml-1">
+          hide
+        </div>
+        <div class="ml-1">
+          past
+        </div>
+        <div class="ml-1 hover:underline"><a
+          href="{{makeHnUrl(itemService.itemData.id)}}">{{countComments(itemService.itemData)}} comments</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <app-page-comment *ngFor="let comment of itemService.itemData.children"
+                    [commentData]="comment"></app-page-comment>
+</div>
