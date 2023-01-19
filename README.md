@@ -1,6 +1,6 @@
 # HackerNews clone - AngularNews
 
-Выполнено на Angular и RxJS без сторонних библиотек. В качестве бекенда использовался [Algolia HN Search API](https://hn.algolia.com/api)
+Выполнено на Angular и RxJS без сторонних библиотек. В качестве бекенда использовался [Algolia HN Search API](https://hn.algolia.com/api). В качестве UI-библиотеки использовался Tailwind CSS.
 
 ![image](https://user-images.githubusercontent.com/89582326/213437768-cf4e7675-8eed-47b8-a8be-49faf38d2f7a.png)
 
