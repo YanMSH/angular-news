@@ -7,7 +7,7 @@
         <div>
           {{pointsAmount}} {{pointsAmount === 1 ? 'point' : 'points'}}
           by {{author}} <a class="hover:underline"
-                                      [routerLink]="['/item']" [queryParams]="{itemId:itemID}">{{createAtDate}}
+                                      [routerLink]="['/item']" [queryParams]="{itemId:itemID}">{{commentsLabel}}
         </a></div>
         <div class="ml-1 hover:underline"><a
           [routerLink]="['/item']" [queryParams]="{itemId:itemID}">{{createAtDate}}</a></div>

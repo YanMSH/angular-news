@@ -53,4 +53,8 @@ export class RecordItemComponent {
   get createAtDate(): string {
     return this.substractDates(this.dataRecord.created_at);
   }
+
+  get commentsLabel():string {
+    return this.makeCommentsLabel(this.dataRecord)
+  }
 }

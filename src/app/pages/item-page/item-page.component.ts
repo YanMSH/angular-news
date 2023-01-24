@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import ItemService from "../../services/item.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import Utils from "../../utils/Utils";
 import {ResourceData} from "../../models/Resource";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-item-page',
   templateUrl: './item-page.component.html',
 })
-export class ItemPageComponent implements OnInit {
+export class ItemPageComponent implements OnInit, OnDestroy {
   itemId: null | number = null;
   loading = false;
   makeURL = Utils.makeURLfromRD;
@@ -17,7 +18,7 @@ export class ItemPageComponent implements OnInit {
   substractDates = Utils.substractDates;
   countComments = Utils.countChildren;
   sliceURL = Utils.sliceURL;
-
+  queryParamsSubscription: Subscription;
   constructor(
     public itemService: ItemService,
     private router: Router,
@@ -27,7 +28,7 @@ export class ItemPageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe((params) => {
+    this.queryParamsSubscription = this.route.queryParams.subscribe((params) => {
       this.itemId = params['itemId'];
       this.loading = true;
       if (this.itemId) {
@@ -36,6 +37,10 @@ export class ItemPageComponent implements OnInit {
         });
       }
     })
+  }
+
+  ngOnDestroy(): void{
+    this.queryParamsSubscription.unsubscribe();
   }
 
   get title(): string | null {
