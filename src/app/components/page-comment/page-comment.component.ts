@@ -24,6 +24,26 @@ export class PageCommentComponent {
     }
   }
 
+  get author():string | null {
+    return this.commentData.author;
+  }
+
+  get createdAtDate():string {
+    return this.substractDates(this.commentData.created_at)
+  }
+
+  get commentsLabel():string {
+    return this.makeShowLabel(this.commentData)
+  }
+
+  get commentText():string | null {
+    return this.commentData.text
+  }
+
+  get replies(): ResourceData[] {
+    return this.commentData.children
+  }
+
   hideBranch(){
     this.visible = !this.visible;
   }

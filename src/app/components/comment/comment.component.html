@@ -1,13 +1,13 @@
 <div>
   <div class="flex text-xs text-gray-500 ml-2">
-    <div>{{dataRecord.author}}</div>
+    <div>{{author}}</div>
     <div class="ml-1 mr-1 hover:underline cursor-pointer"><a
-      [routerLink]="['/item']" [queryParams]="{itemId:dataRecord.objectID}">{{substractDates(dataRecord.created_at)}}</a></div>
-    <div class="ml-1 mr-1">on: <a [routerLink]="['/item']" [queryParams]="{itemId:dataRecord.objectID}"
-                                  class="hover:underline cursor-pointer">{{dataRecord.story_title}}</a></div>
+      [routerLink]="['/item']" [queryParams]="{itemId:commentID}">{{createAtDate}}</a></div>
+    <div class="ml-1 mr-1">on: <a [routerLink]="['/item']" [queryParams]="{itemId:commentID}"
+                                  class="hover:underline cursor-pointer">{{storyTitle}}</a></div>
   </div>
 
-  <div class="text-sm ml-2" [innerHTML]="dataRecord.comment_text | sanitizeHtml">
+  <div class="text-sm ml-2" [innerHTML]="commentText | sanitizeHtml">
   </div>
 
 </div>

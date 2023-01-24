@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {DataService} from "../../services/data-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {DataRecord} from "../../models/Record";
 
 @Component({
   selector: 'app-records',
@@ -37,6 +38,11 @@ export class RecordsComponent implements OnInit{
     })
 
   }
+
+  get records(): DataRecord[]{
+    return this.dataService.data;
+  }
+
 
   changePage(val: number){
     this.router.navigate([], {

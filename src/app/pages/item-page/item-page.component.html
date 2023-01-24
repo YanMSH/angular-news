@@ -3,15 +3,15 @@
 <div *ngIf="!loading" class="ml-1flex flex-col">
 
   <div class="text-base mt-2 pb-4 border-b-2 border-gray-300"><a
-    href="{{itemService.itemData.url}}">{{itemService.itemData.title}}
-    <div *ngIf="itemService.itemData.text" class="text-sm ml-3 mb-2"
-         [innerHTML]="itemService.itemData.text | sanitizeHtml"></div>
-    <span *ngIf="itemService.itemData.url" class="text-xs">({{sliceURL(itemService.itemData.url)}})</span>
+    href="{{url}}">{{title}}
+    <div *ngIf="text" class="text-sm ml-3 mb-2"
+         [innerHTML]="text | sanitizeHtml"></div>
+    <span *ngIf="url" class="text-xs">({{slicedURL}})</span>
   </a>
     <div>
       <div class="flex text-xs">
-        {{itemService.itemData.points}} {{itemService.itemData.points === 1 ? 'point' : 'points'}}
-        by {{itemService.itemData.author}} {{substractDates(itemService.itemData.created_at)}}
+        {{pointsAmount}} {{pointsAmount === 1 ? 'point' : 'points'}}
+        by {{author}} {{createAtDate}}
         <div class="ml-1">
           hide
         </div>
@@ -19,12 +19,12 @@
           past
         </div>
         <div class="ml-1 hover:underline"><a
-          href="{{makeHnUrl(itemService.itemData.id)}}">{{countComments(itemService.itemData)}} comments</a>
+          href="{{hackerNewsURL}}">{{createAtDate}} comments</a>
         </div>
       </div>
 
     </div>
   </div>
-  <app-page-comment *ngFor="let comment of itemService.itemData.children"
+  <app-page-comment *ngFor="let comment of comments"
                     [commentData]="comment"></app-page-comment>
 </div>

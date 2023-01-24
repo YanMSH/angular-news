@@ -2,14 +2,14 @@
   <div class="text-sm">
     <div>
       <div class="flex text-xs text-gray-500">
-        {{commentData.author}} {{substractDates(commentData.created_at)}}
+        {{author}} {{createdAtDate}}
         <div class="ml-1 hover:underline cursor-pointer" (click)="hideBranch()">
-          {{visible ? 'hide' : makeShowLabel(this.commentData)}}
+          {{visible ? 'hide' : commentsLabel}}
         </div>
       </div>
       <div *ngIf="visible">
-        <div [innerHTML]="commentData.text | sanitizeHtml"></div>
-        <app-page-comment *ngFor="let comment of commentData.children" [commentData]="comment"></app-page-comment>
+        <div [innerHTML]="commentText | sanitizeHtml"></div>
+        <app-page-comment *ngFor="let reply of replies" [commentData]="reply"></app-page-comment>
       </div>
     </div>
   </div>

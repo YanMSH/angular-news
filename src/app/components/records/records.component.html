@@ -1,14 +1,14 @@
-<div *ngIf="dataService.data">
+<div *ngIf="records">
   <p *ngIf="loading" class="text-center text-lg ">Loading...</p>
   <div *ngIf="!loading">
     <div *ngIf="isComments">
-      <div *ngFor="let record of dataService.data; let i=index" class="flex justify-center w-fit mt-2 mb-2">
+      <div *ngFor="let record of records" class="flex justify-center w-fit mt-2 mb-2">
         <app-comment [dataRecord]="record"></app-comment>
       </div>
     </div>
 
     <div *ngIf="!isComments">
-      <app-record-item *ngFor="let record of dataService.data" [dataRecord]="record"></app-record-item>
+      <app-record-item *ngFor="let record of records" [dataRecord]="record"></app-record-item>
     </div>
     <button *ngIf="!isFirstPage" (click)="changePage(-1)"
             class="mx-2 border-gray-300 border-[1px] px-2 hover:bg-gray-200">Less
