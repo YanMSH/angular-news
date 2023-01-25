@@ -1,13 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {DataService} from "../../services/data-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DataRecord} from "../../models/Record";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-records',
   templateUrl: './records.component.html',
 })
-export class RecordsComponent implements OnInit{
+export class RecordsComponent implements OnInit, OnDestroy{
   @Input() sortType: 'date' | 'points';
   @Input() tags: string[];
   loading = false;
@@ -15,6 +16,7 @@ export class RecordsComponent implements OnInit{
   isLastPage = false;
   isFirstPage = true;
   isComments = false;
+  queryParamsSubscription: Subscription
   constructor(public dataService: DataService, private router: Router, private route: ActivatedRoute) {
   }
 
@@ -22,7 +24,7 @@ export class RecordsComponent implements OnInit{
 
   ngOnInit(): void {
     this.isComments = this.tags[0] === 'comment';
-    this.route.queryParams.subscribe((params)=>{
+    this.queryParamsSubscription = this.route.queryParams.subscribe((params)=>{
       this.pageCounter = +params['page'] ? + params['page'] : 0;
       this.loading = true
       this.dataService.getData(this.sortType, this.tags, this.pageCounter).subscribe(() => {
@@ -36,7 +38,10 @@ export class RecordsComponent implements OnInit{
         }
       })
     })
+  }
 
+  ngOnDestroy() {
+    this.queryParamsSubscription.unsubscribe();
   }
 
   get records(): DataRecord[]{
